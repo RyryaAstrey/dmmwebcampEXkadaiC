@@ -11,6 +11,4 @@ class SearchesController < ApplicationController
     end
   end
   
-  def search_result
-  end
 end
