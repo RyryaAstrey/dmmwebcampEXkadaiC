@@ -7,7 +7,7 @@
             <%= image_tag chat.user.get_profile_image, size: '100x100' %>
           </th>
           <th>
-            <h5><%= chat.user.name %></h5>
+            <h5><strong><i class="fas fa-user"></i><%= chat.user.name %></strong></h5>
             <p style="text-align: left;"><%= chat.message %></p>
           </th>
           <th>
@@ -20,7 +20,7 @@
             <%= image_tag chat.user.get_profile_image, size: '100x100' %></th>
           </th>
           <th>
-            <h5><strong><%= chat.user.name %></strong></h5>
+            <h5><strong><i class="fas fa-user"></i><%= chat.user.name %></strong></h5>
               <p style="text-align: left;"><%= chat.message %></p>
           </th>
         </tr>
