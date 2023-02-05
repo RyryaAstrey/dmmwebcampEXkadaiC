@@ -1,2 +1,2 @@
-$('.message').append("<p style='text-align: left;'><%= @chat.message %></p>");
-$('input[type=text])
+$('#chats_index').html("<%= j(render partial: "chats/index", locals: {chats: @chats}) %>");
+$('input[type=text]).val("")

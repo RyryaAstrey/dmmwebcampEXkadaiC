@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
   get "home/about"=>"homes#about"
   get "search" => "searches#search"
-  get "chat/:id" => "chats#show", as: 'chat'
+  # get "chat/:id" => "chats#show", as: 'chat'
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update]do
     resources :book_comments, only:[:create, :destroy]
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
   end
   
-  resources :chats, only: [:create]
+  resources :chats, only: [:show,:create,:destroy]
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

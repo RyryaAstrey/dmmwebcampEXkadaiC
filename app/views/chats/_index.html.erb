@@ -1,0 +1,30 @@
+<table class="message table">
+  <% chats.each do |chat| %>
+    <% if chat.user_id == current_user.id %>
+      <tbody>
+        <tr>
+          <th>
+            <%= image_tag chat.user.get_profile_image, size: '100x100' %>
+          </th>
+          <th>
+            <h5><%= chat.user.name %></h5>
+            <p style="text-align: left;"><%= chat.message %></p>
+          </th>
+          <th>
+            <th><%= link_to "削除", chat_path(chat.id), method: :delete, class: "btn btn-danger"%></th>
+          </th>
+        </tr>
+    <% else %>
+        <tr>
+          <th>
+            <%= image_tag chat.user.get_profile_image, size: '100x100' %></th>
+          </th>
+          <th>
+            <h5><strong><%= chat.user.name %></strong></h5>
+              <p style="text-align: left;"><%= chat.message %></p>
+          </th>
+        </tr>
+      </tbody>
+    <% end %>
+  <% end %>
+</table>
