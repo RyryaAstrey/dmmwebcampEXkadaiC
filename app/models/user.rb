@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :book_comments, dependent: :destroy
   has_many :user_rooms, dependent: :destroy
   has_many :chats, dependent: :destroy
+  has_many :view_counts, dependent: :destroy
   has_one_attached :profile_image
   
   # --フォロー・フォロワー機能のリレーション--

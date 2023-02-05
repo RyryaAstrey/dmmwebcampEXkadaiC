@@ -5,6 +5,12 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @books = Book.new
     @book_comment = BookComment.new
+    unless ViewCount.find_by(user_id: current_user.id, book_id: @book.id)
+    # showアクションを実行した時、ViewCountテーブルの中に（）の中と一致するレコードが見つからなかった時、↓を実行
+      current_user.view_counts.create(book_id: @book.id)
+      # ※ViewCount.create(user_id: current_user.id, book_id: @book.id)と同じ意味
+      # ViewCountテーブルの中のuser_idカラムにcurrent_user.idを当てはめ、book_idに@book.idを当てはめてレコードを作成
+    end
   end
 
   def index
