@@ -11,10 +11,13 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Users</h2>
       <div class="mb-2 group-botton">
-        <%= link_to new_group_path, class: "btn btn-primary btn-{themecolor}.rounded-pill btn-sm" do %>
+        <%= link_to new_group_path, class: "btn btn-success btn-{themecolor}.rounded-pill btn-sm" do %>
           <i class="fas fa-plus"></i>グループを作成する
         <% end %>
         |
+        <%= link_to groups_path, class: "btn btn-info btn-{themecolor}.rounded-pill btn-sm" do %>
+          <i class="fas fa-layer-group"></i>グループ一覧
+        <% end %>
       </div>
       <%= render 'index',users: @users %>
     </div>
