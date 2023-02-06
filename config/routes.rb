@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   
   resources :chats, only: [:show,:create,:destroy]
   
+  resources :groups, only: [:new,:index,:edit,:show,:create,:update]
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 end

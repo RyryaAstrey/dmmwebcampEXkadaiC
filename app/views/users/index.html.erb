@@ -10,6 +10,12 @@
 
     <div class='col-md-8 offset-md-1'>
       <h2>Users</h2>
+      <div class="mb-2 group-botton">
+        <%= link_to new_group_path, class: "btn btn-primary btn-{themecolor}.rounded-pill btn-sm" do %>
+          <i class="fas fa-plus"></i>グループを作成する
+        <% end %>
+        |
+      </div>
       <%= render 'index',users: @users %>
     </div>
   </div>
