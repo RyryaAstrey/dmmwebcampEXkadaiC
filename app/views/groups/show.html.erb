@@ -36,9 +36,15 @@
         </div>
       </div>
       <!--グループ参加ボタン-->
+      <% unless @group.owner_id == current_user.id %>
       <div class="text-center">
-        <%= link_to "このグループに参加する",
+        <% unless @group.inculudesUser?(current_user) %>
+          <%= link_to "このグループに参加する", group_users_path(@group.id), method: :post, class: "btn btn-sm btn-success" %>
+        <%else%>
+          <%= link_to "このグループを退会する", group_user_path(@group.id), method: :delete, class: "btn btn-sm btn-danger" %>
+        <%end%>
       </div>
+      <%end%>
     </div>
   </div>
 </div>
