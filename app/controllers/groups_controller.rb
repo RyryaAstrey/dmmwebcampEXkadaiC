@@ -23,6 +23,7 @@ class GroupsController < ApplicationController
   def create
     @group=Group.new(group_params)
     @group.owner_id=current_user.id
+    @group.user << current_user.id #ここでログイン中のユーザーがグループに参加
     if @group.save
       redirect_to group_path(@group.id)
     else
