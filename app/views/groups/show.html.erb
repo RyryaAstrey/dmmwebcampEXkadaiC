@@ -13,38 +13,60 @@
           <% if current_user == @user %>
             <div class="text-right mb-2">
               <%= link_to "グループを編集", edit_group_path(@group.id),  class: "btn btn-success btn-sm" %>
-          <% end%>
-          <% if current_user == @user %>
               <%= link_to "グループを削除", group_path(@group.id), method: :delete, class: "btn btn-danger btn-sm", "data-confirm" => "本当に削除しますか？"%>
             </div>
-          <% end%>
-      <div class="row p-2 border border-dark bg-secondary">
+          <!--グループ参加ボタン-->
+          <% else @group.owner_id == current_user.id %>
+            <div class="text-right mb-2">
+              <% unless @group.inculudesUser?(current_user) %>
+                <%= link_to "このグループに参加する", group_group_users_path(@group.id), method: :post, class: "btn btn-sm btn-success" %>
+              <% else %>
+                <%= link_to "このグループを退会する", group_group_user_path(@group.id), method: :delete, class: "btn btn-sm btn-danger" %>
+              <%end%>
+            </div>
+          <%end%>
+      <!--ユーザーinfoの枠内-->
+      <div class="row p-2 mb-4 border border-dark bg-secondary">
         <div class="col-md-3 mr-4 pl-0">
             <%= image_tag @group.get_group_image, size: "200x150" %>
         </div>
-        <div class="col-md-6 p-0">
+        <div class="col-md-5 p-0">
           <h4 class="text-info font-weight-bold border-bottom border-dark"><%= @group.name %></h4>
           <div>
             <%= @group.introduction %>
           </div>
         </div>
-        <div class="col md-4">
+        <div class="col md-5">
           <div class="text-center">
               <%= image_tag @user.get_profile_image, size: "100x100" %>
           </div>
           <p class="text-center">オーナー：<%= @user.name %></p>
         </div>
       </div>
-      <!--グループ参加ボタン-->
-      <% unless @group.owner_id == current_user.id %>
-      <div class="text-center">
-        <% unless @group.inculudesUser?(current_user) %>
-          <%= link_to "このグループに参加する", group_users_path(@group.id), method: :post, class: "btn btn-sm btn-success" %>
-        <%else%>
-          <%= link_to "このグループを退会する", group_user_path(@group.id), method: :delete, class: "btn btn-sm btn-danger" %>
-        <%end%>
-      </div>
-      <%end%>
+      <!--ここまでユーザーinfoの枠内-->
+      <h3>メンバーリスト</h3>
+      <!--ここからメンバーリスト-->
+      <table class="table">
+        <thead>
+          <th></th>
+          <th>Name</th>
+          <th>Introduction</th>
+          <th>Post Books</th>
+          <!--<th colspan=""></th>-->
+        </thead>
+        <tbody>
+          <% @group.users.each do |member| %>
+          <tr>
+            <td><%= link_to user_path(member.id) do %>
+              <%= image_tag member.get_profile_image, size: "100x100" %>
+              <%end%></td>
+            <td><%= link_to member.name, user_path(member.id) %></td>
+            <td><%= member.introduction %></td>
+            <td><%= member.books.count %></td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

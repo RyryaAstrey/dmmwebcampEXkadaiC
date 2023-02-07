@@ -26,6 +26,7 @@
               </td>
               <td><%= link_to group.name, group_path(group.id) %></td>
               <td><%= group.introduction %></td>
+              <td>メンバー数：<%= group.users.count %>人</td>
               <td><% if current_user == group.owner_id %>
               <%= link_to "Edit", edit_group_path(group.id), class: "btn btn-success" %>
               <%end%></td>

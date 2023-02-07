@@ -1,6 +1,6 @@
 class GroupUsersController < ApplicationController
   def create
-    group_user = current_user.group_users.new(group_id: params[:group_id]) #ここでgroup_usersテーブルカラムを指定
+    group_user = current_user.group_users.new(group_id: params[:group_id]) #ここでgroup_usersテーブルのカラムを指定
     group_user.save
     redirect_to request.referer
   end
