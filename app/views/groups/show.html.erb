@@ -10,12 +10,20 @@
 
     <div class='col-md-8 offset-md-1'>
         <h2 class="m-0">Group info</h2>
+          <!--グループ作成者のみ見える記述-->
           <% if current_user == @user %>
             <div class="text-right mb-2">
-              <%= link_to "グループを編集", edit_group_path(@group.id),  class: "btn btn-success btn-sm" %>
-              <%= link_to "グループを削除", group_path(@group.id), method: :delete, class: "btn btn-danger btn-sm", "data-confirm" => "本当に削除しますか？"%>
-            </div>
-          <!--グループ参加ボタン-->
+              <%= link_to edit_group_path(@group.id),  class: " btn btn-success btn-sm" do %>
+                <i class="fas fa-edit"></i>グループを編集
+              <%end%>
+              <%= link_to group_path(@group.id), method: :delete, class: "btn btn-danger btn-sm", "data-confirm" => "本当に削除しますか？" do%>
+                <i class="fas fa-trash-alt"></i>グループを削除
+              <%end%>
+              <%= link_to group_new_mail_path(@group), class: "btn btn-primary btn-sm" do %>
+                <i class="fas fa-envelope"></i>全員にメールを送る
+              <%end%>
+              </div>
+          <!--グループ参加ボタン　グループ作成者じゃない人に見える-->
           <% else @group.owner_id == current_user.id %>
             <div class="text-right mb-2">
               <% unless @group.inculudesUser?(current_user) %>
@@ -38,7 +46,9 @@
         </div>
         <div class="col md-5">
           <div class="text-center">
+            <%= link_to user_path(@user.id) do %>
               <%= image_tag @user.get_profile_image, size: "100x100" %>
+            <%end%>
           </div>
           <p class="text-center">オーナー：<%= @user.name %></p>
         </div>
